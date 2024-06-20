@@ -1,0 +1,16 @@
+#include<stdio.h>
+int main(){
+	int A;
+	int B;
+	printf("A : ");
+	scanf("%d",&A);
+	printf("\nB : ");
+	scanf("%d",&B);
+	int bo=B%10;
+	int bt=(B%100-bo)/10;
+	int bth=(B-bt-bo)/100;
+	printf("\n%d",bo*A);
+	printf("\n%d",bt*A);
+	printf("\n%d",bth*A);
+	printf("\n%d",A*B);
+}
