@@ -1,0 +1,48 @@
+#include <stdio.h>
+int main()
+{
+	int length=10;
+	int i;
+	printf("숫자 저장고의 길이를 설정해주세요 : ");
+	scanf("%d",&length);
+	int List[length];
+	printf("\n숫자 저장고 [A=숫자 입력 B=출력]");
+	char AB;
+	int A;
+	while (1)
+	{
+		getchar();
+		printf("\n무엇을 하시겠습니까? : ");
+		AB=getchar();
+		if (AB==65)
+		{
+			printf("\n입력할 저장고 위치 : ");
+			scanf("%d",&i);
+			if (i<=length)
+			{
+				printf("\n변경할 값: ");
+				scanf("%d",&A);
+				List[i]=A;
+			}
+			else
+			{
+				printf("\nError:위치가 정상적이지 않습니다.");
+				continue;
+			}
+		}
+		else if (AB==66)
+		{
+			printf("\n출력받을 저장고 위치 : ");
+			scanf("%d",&i);
+			if (i<=length)
+			{
+				printf("\n%d번쨰의 값 : %d",i,List[i]);
+			}
+			else
+			{
+				printf("\nError:위치가 정상적이지 않습니다.");
+				continue;
+			}
+		}
+	}
+}
