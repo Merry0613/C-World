@@ -1,0 +1,36 @@
+#include <stdio.h>
+int main()
+{
+	int D;
+	int	i;
+	int j=1;
+	int u=1;
+	printf("정사각형 크기 : ");
+	scanf("%d",&i);
+	while(u<=i)
+	{
+		if(u%2==0)
+		{
+			D=1;
+		}
+		else
+		{
+			D=0;
+		}
+		while(j<=i)
+		{
+			if(j%2==D)
+			{
+			printf("□");
+			}
+			else
+			{ 
+			printf("■");
+			}
+			j++;
+		}
+		j=1;
+		u++;
+		printf("\n");
+	}
+}
