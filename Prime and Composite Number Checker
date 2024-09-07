@@ -1,0 +1,45 @@
+#include <stdio.h>
+int main()
+{
+	int i;
+	int j=1;
+	int B=0;
+	int Dv=0;
+	printf("검사해볼 숫자 : ");
+	scanf("%d",&i);
+	int Divisor[i+1];
+	while (Dv<=i+1)
+	{
+	Divisor[Dv]=0;
+	Dv++;
+	}
+	while(j<=i)
+	{
+		if(i%j==0)
+		{
+			Divisor[B]=j;
+			B++;
+		}
+		j++;
+	}
+	if (B==2)
+	{
+		printf("\n%d는 소수입니다.",i);
+	}
+	else if(B>=3)
+	{
+		printf("\n%d는 %d개의 약수를 가진 합성수입니다.",i,B);
+		printf("\n약수 : ");
+		Dv=0;
+		while (Divisor[Dv]!=0)
+		{
+		printf("%d ",Divisor[Dv]);
+		Dv++;
+		}
+	}
+	else
+	{
+		printf("\n%d는 소수도 합성수도 아닙니다.",i);
+	}
+	return 0;
+}
