@@ -1,0 +1,32 @@
+#include <stdio.h>
+int main(){
+	int deo;
+	int det;
+	int i=2;
+	int j=1;
+	int u=1;
+	printf("구구단 시작점  : ");
+	scanf("%d",&deo);
+	i=deo;
+	printf("\n구구단 끝점 : ");
+	scanf("%d",&det);
+	if(i<=det)
+	{
+		while(i<=det)
+		{
+			printf("\n  <%d단>  ",i);
+			while(j<=9)
+			{
+				u=i*j;
+				printf("\n%d*%d=%d",i,j,u);
+				j++;
+			}
+			j=0;
+			i++;
+		}
+	}
+	else
+	{
+		printf("\nERROR : 시작점과  끝점이 정상적이지 않습니다.");
+	}
+}
