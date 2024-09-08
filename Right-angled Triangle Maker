@@ -1,0 +1,22 @@
+#include <stdio.h>
+int main()
+{
+	int i;
+	int j=1;
+	int u=1;
+	printf("직각삼각형 크기 : ");
+	scanf("%d",&i);
+	j=i-1;
+	printf("■\n");
+	while (u<=i)
+	{
+		while (j<=i)
+		{
+			printf("■");
+			j++; 
+		}
+		u++;
+		j=i-u;
+		printf("\n");
+	}
+}
