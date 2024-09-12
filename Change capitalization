@@ -1,0 +1,22 @@
+#include <stdio.h>
+int main()
+{
+	char w;
+	printf("대/소문자 변경할 영문자 : ");
+	w=getchar();
+	if (65<=w and w<97)
+	{
+		w+=32;
+		printf("\n변경된 문자 : %c",w);
+	}
+	else if (97<=w and w<123)
+	{
+		w-=32;
+		printf("\n변경된 문자 : %c",w);
+	}
+	else
+	{
+		printf("\nError:영문자가 맞는지 확인해주십시오");
+	}
+	return 0;
+}
