@@ -1,0 +1,78 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+int main()
+{
+	//랜덤 시드 셋업 
+	srand(time(NULL));
+	//변수 선언 
+	char act=' ';
+	int MyDice=1;
+	int AiDice=1;
+	int Score=0;
+	int AiScore=0;
+	//튜토리얼 
+	printf("행동[내가 이긴다 : A / 내가 진다 : B / 비긴다 : C]");
+	//본격 시작 
+	while (1)
+	{
+		//주사위 굴리기 
+		MyDice=rand();
+		AiDice=rand();
+		MyDice=MyDice%6+1;
+		AiDice=AiDice%6+1;
+		//현재 상황 출력 
+		printf("\n현재 점수:[나 : %d / AI : %d]",Score,AiScore);
+		printf("\n내 주사위 값 : %d",MyDice);
+		//행동 선택 
+		printf("\n행동을 선택하세요 : ");
+		act=getchar();
+		//주사위 값 출력 
+		printf("\n내 주사위 값 : %d",MyDice);
+		printf("\n상대편 주사위 값 : %d",AiDice);
+		//"이긴다"에 배팅했을 때 
+		if (act==65)
+		{
+			if(MyDice>AiDice)
+			{
+				printf("\n배팅 성공!");
+				Score++;
+			}
+			else
+			{
+				printf("\n배팅 실패...");
+				AiScore++;
+			}
+		}
+		//"진다"에 배팅했을 떄 
+		else if (act==66)
+		{
+			if(MyDice<AiDice)
+			{
+				printf("\n배팅 성공!");
+				Score++;
+			}
+			else
+			{
+				printf("\n배팅 실패...");
+				AiScore++;
+			}
+		}
+		//"비긴다"에 배팅했을 때 
+		else if (act==67)
+		{
+			if(MyDice==AiDice)
+			{
+				printf("\n배팅 성공!");
+				Score++;
+			}
+			else
+			{
+				printf("\n배팅 실패...");
+				AiScore++;
+			}
+		}
+		getchar();
+		printf("\n");
+	}
+}
