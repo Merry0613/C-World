@@ -1,0 +1,38 @@
+#include<stdio.h>
+int main(){
+	//시작:변수 입력 
+		//1.자물쇠 배열 선언&자물쇠 배열 길이 셋업 
+		int length;
+		printf("자물쇠 길이 : ");
+		scanf("%d",&length);
+		int locknum[length+1];
+		//2.교환 조건 거리 선언&셋업 
+		int k;
+		printf("\n교환 조건 거리 : ");
+		scanf("%d",&k);
+		//3.배열 내 초기 숫자 셋업 
+		int i=0;
+		printf("\n 초기 숫자 [\n");
+		while(i<length)
+		{
+			scanf("%d",&locknum[i]);
+			i++;
+		}
+		printf("]");
+		//기타:찾은 오름차순 개수 
+		int Found=0;
+	//메인:답 찾기 
+		//1.
+		
+		
+		
+	//출력:답 출력
+	 if(length==Found)
+	 {
+	 	printf("YES");
+	 }
+	 else
+	 {
+	 	printf("NO");
+	 }
+}
