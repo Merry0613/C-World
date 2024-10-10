@@ -1,0 +1,59 @@
+#include<stdio.h>
+int main(){
+	//반복문 사용자
+	int i=0,j=0; 
+	//도화지 배열 
+	int pallete[100][100]={0,};
+	//색종이 개수 
+	int paper=0;
+	//색종이 관련 사용자
+	int o=0,k=0; 
+	//도화지에서 색종이가 차지하는 넓이 
+	int h=0;
+	//색종이 개수 셋업 
+	printf("사용할 색종이 개수 : ");
+	scanf("%d",&paper);
+	//색종이 사용 
+	while(paper>0)
+	{
+		i=0;
+		j=0;
+		o=0;
+		k=0;
+		//위치상 입력
+		printf("색종이 위치 : ");
+		scanf("%d %d",&o,&k);
+		while(i<10)
+		{
+			while(j<10)
+			{
+				//if 해당 위치가 0이라면 
+				if(pallete[o+i][k+j]==0)
+				{
+				//위치 0->1로 변경 
+				pallete[o+i][k+j]=1;
+				//넓이 증가
+				h++;
+				}
+				j++;
+			}
+			j=0;
+			i++;
+		}
+		printf("\n");
+		paper--;
+	}
+	i=0,j=0;
+	while(i<100)
+	{
+		while(j<100)
+		{
+			printf("%d ",pallete[i][j]);
+			j++;
+		}
+		printf("\n");
+		j=0;
+		i++;
+	}
+	printf("\n색종이가 차지하는 넓이 : %d",h); 
+}
