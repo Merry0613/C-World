@@ -1,0 +1,106 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <string.h>
+//게임 특징:
+// 적을 처치하면서 탐험하는 턴제형 RPG
+// 전투가 끝날 때마다 특수 능력이 있는 보물 획득
+//플레이 캐릭터는 점점 늘어남
+
+//전역변수 
+	//적 레벨 설정(적 캐릭터는 점점 강해짐)
+		int level=1; 
+	//차례 카운트용 변수 선언 
+		int turn;
+	//플레이어 능력치용 변수 
+		char act;
+		int maxhp=100;
+		int hp=100;
+		int atk=5;
+		int got[30]
+	//적 캐릭터 능력치용 변수 
+		int xhp;
+		int xatk;
+		char xname[100];
+	//기타 변수
+		int i;
+		int j;
+		int o;
+		int k;
+void skinf()
+{
+	printf("  기본 기술 : [공격 : A , 휴식 : B]\n");
+}
+int fight()
+{
+	printf("무엇을 하시겠습니까?");
+	act=getchar();
+	if(act==65)
+		{
+			xhp-=atk;
+		}
+	else if(act==66)
+		{
+			hp+=10
+		}
+	if(got[0]==1)
+	{
+		if(act==81)
+			{
+				xhp-=atk*0.7;
+				hp+=atk*0.2;
+			}
+	}
+}
+int main()
+{
+	//랜덤 시드 설정
+		srand(time(NULL));
+	while (1)
+	{
+		if (level>20)
+		{
+			break;
+		}
+		else
+		{
+			//i=적 종류(일시적)
+			i=rand()%level+1;
+			if(i<99)
+			{
+				strcpy(xname,"썩어가는 병사");
+				xhp=rand()%10+15;
+			}
+		}
+			printf("%s가 나타났다!\n",xname);
+			printf("  조작법:[행동:A,능력치 확인:B,기술 확인:C]\n");
+			while(xhp>0)
+			{
+			printf("정보를 확인하거나,행동을 준비하세요.\n");
+
+			act=getchar();
+			while (1)
+			{
+				if(act==65)
+				{
+					fight();
+					break;
+				}
+				else if(act==66)
+				{
+					printf("내 체력 : %d\n",hp);
+					printf("내 공격력 : %d\n",atk);
+					printf("적 체력 : %d\n",xhp);
+					printf("적 공격력 : %d\n",xatk);
+					break;
+				}
+				else if(act==67)
+				{
+					skinf();
+					break;
+				}
+			}
+			getchar();
+		}
+	}
+}
