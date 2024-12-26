@@ -1,0 +1,66 @@
+#include<stdio.h>
+int main()
+{	
+	int YBSG=0;
+	int XBSG=0;
+	
+	int Xlength;
+	int Ylength;
+	
+	printf("Y 길이 : ");
+	scanf("%d",&Ylength);
+	printf("X 길이 : ");
+	scanf("%d",&Xlength);
+			
+	int ARR[100][100]={0,};
+	int Gold[100][100]={0,};
+	
+	int max=0;
+			
+	int i=0;
+	int j;
+			
+	while(i<Ylength)
+	{
+		j=0;
+		while(j<Xlength)
+		{
+			scanf("%d",&ARR[i][j]);
+			j++;
+		}
+		i++;
+	}
+	
+	i=0;
+	j=0;
+	
+	while(i<Ylength)
+	{
+		j=0;
+		while(j<Xlength)
+		{
+			Gold[i][j]=ARR[i+1][j]+ARR[i-1][j]+ARR[i][j+1]+ARR[i][j-1]+ARR[i][j];
+			j++;
+		}
+		i++;
+	}
+	
+	i=0;
+	j=0;
+	while(i<Ylength)
+	{
+		j=0;
+		while(j<Xlength)
+		{
+			if(Gold[i][j]>max)
+			{
+				max=Gold[i][j];
+				YBSG=i;
+				XBSG=j;
+			}
+			j++;
+		}
+		i++;
+	}
+	printf("X좌표 : %d/Y좌표 : %d, 채광량 : %d",XBSG,YBSG,max);
+}	
