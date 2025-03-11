@@ -1,0 +1,106 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <stdio.h>
+#include <windows.h>
+//콘솔창 초기화: system("cls");
+
+int diff;
+int room[5][5]={0,};
+int spot[5][5]={0,};
+int turn=100;
+
+
+
+//다목적실=0 
+//발전소=-1
+//공구 창고=1
+//공급실=2
+//냉각수 탱크=3
+//파이프실=4 
+//제어실=5
+//연결로 통제실=6 
+//정보실 =7
+
+int i=0;
+int j=0;
+char chri=0;
+
+int mr(int n)
+{
+	srand(time(NULL));
+	while(1)
+	{
+		int i=rand()%6;
+		int j=rand()%6;
+		if(room[i][j]==0)
+		{
+			room[i][j]=n;
+			break;
+		}
+	}
+}
+int mapping()
+{	
+	room[2][2]=-1;
+	mr(1);
+	mr(2);
+	mr(3);
+	mr(4);
+	mr(5);
+	mr(6);
+	mr(7);
+}
+int main()
+{
+	printf("난이도[일반:A/익스트림:B] : ");
+	scanf("%c",&chri);
+	if(chri=='B')
+	{
+		diff=2;
+		printf("난이도가 익스트림으로 선택되었습니다.");
+		turn=20;
+	}
+	else
+	{
+		diff=1;
+		printf("난이도가 일반으로 선택되었습니다.");
+		turn=30;
+	}
+	
+	
+	Sleep(1500);
+	
+	system("cls");
+	
+	mapping();
+	
+	spot[2][2]=1;
+	
+	while(1)
+	{
+		printf("남은 시간 : %d\n",turn);
+		i=0;
+		j=0;
+		while(i<5)
+		{
+			j=0;
+			while(j<5)
+			{
+				if(spot[i][j]==1)
+				{ 
+					printf("■");
+				}
+				else
+				{
+					printf("□");
+				}
+				j++;
+			}
+			printf("\n");
+			i++;
+		}
+		scanf("%d",&i);
+	}
+	
+}
