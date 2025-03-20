@@ -1,0 +1,41 @@
+#include<stdio.h>
+#include<algorithm>
+#include<iostream>
+#include<stack>
+using namespace std;
+stack<pair<int,int>> ball;
+int fill(int A, int B)
+{
+	int i=0;
+	while(!ball.empty())
+	{
+		ball.pop();
+	}
+	while(i<length)
+	{
+		ball.push<A,B>;
+		i++;
+	}
+}
+int main()
+{
+
+	int score=0;
+	
+	int length=0;
+	scanf("%d",&length);
+	
+	int i=0;
+	while(i<length) 
+	{
+		scanf("%d %d",&ball[i].first,&ball[i].second);
+		i++;
+	}
+	
+	i=0;
+	while(i<length)
+	{
+		cout << p[i].name << endl;
+		i++;
+	}
+}
