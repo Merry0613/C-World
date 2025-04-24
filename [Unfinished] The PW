@@ -3,19 +3,9 @@
 #include <time.h>
 #include <stdio.h>
 #include <windows.h>
+#include <algorithm>
 #include <conio.h>
 //콘솔창 초기화: system("cls");
-
-//다목적실=0 
-//발전소=-1
-//탈출구=-2
-//공구 창고=1
-//공급실=2
-//냉각수 탱크=3
-//파이프실=4 
-//제어실=5
-//연결로 통제실=6 
-//정보실 =7
 
 int diff;
 int locks=0;
@@ -25,44 +15,73 @@ int used[5][5]={0,};
 int discover[5][5]={0,};
 int locked[5][5]={0,};
 
+//좌표인자들 
 int x,y=0;
 int ax,ay=0;
-int turn=100;
 
+//시간정리 (턴은 남은 시간, 타임은 지나간 시간) 
+int turn=100;
+int time=0;
+
+//아이템 
 int keys=0;
 int bucket=0;
 
+//특수 조건들 
 int coolant=0;
 int Control=0;
 int pipe=0;
 
+//로그 입출력 담당(first=일어난 턴, second=한 행동) 
+deque<pair<int,int>> log;
+
+//다양하게 쓰이는 만능변수들
 int i=0;
 int j=0;
 int o=0;
 char chri=0;
 
+void LogM(int a)
+{
+	int n=log.at(a).second;
+	int m=log.at(a).first;
+	if(n==1) printf("%d턴 전에 위치 이동됨\n",time-m);
+	if(n==2) printf("%d턴 전에 아이템/정보 획득됨\n",time-m);
+	if(n==3) printf("%d턴 전에 냉각수가 공급됨\n",time-m);
+	if(n==4) printf("%d턴 전에 연결로가 토글됨\n",time-m);
+	if(n==5) printf("%d턴 전에 공급실에서 공급 초기화됨\n",time-m);
+}
+int UpLog(int a, int b)
+{
+	if(log.size()>49)
+	{
+		log.pop();
+	}
+	log.push_back({a,b});
+}
 const char* Rn(int n)
 {
-	if(n==-2)
-		return "탈출구";
-	if(n==-1)
-		return "발전소";
-	if(n==0)
-		return "다목적실";
-	if(n==1)
-		return "공구 창고";
-	if(n==2)
-		return "공급실";
-	if(n==3)
-		return "냉각수 탱크";
-	if(n==4)
-		return "파이프실";
-	if(n==5)
-		return "제어실";
-	if(n==6)
-		return "연결로 통제실";
-	if(n==7)
-		return "정보실";
+	//다목적실=0 
+	//발전소=-1
+	//탈출구=-2
+	//공구 창고=1
+	//공급실=2
+	//냉각수 탱크=3
+	//파이프실=4 
+	//제어실=5
+	//연결로 통제실=6 
+	//정보실 =7
+	
+	if(n==-2) return "탈출구";
+	if(n==-1) return "발전소";
+	if(n==0) return "다목적실";
+	if(n==1) return "공구 창고";
+	if(n==2) return "공급실";
+	if(n==3) return "냉각수 탱크";
+	if(n==4) return "파이프실";
+	if(n==5) return "제어실";
+	if(n==6) return "연결로 통제실";
+	if(n==7) return "정보실";
 }
 int information()
 {
@@ -100,6 +119,7 @@ int use(int n)
 	{
 		if(bucket==-1 and coolant==0)
 		{
+			Uplog(time,3);
 			printf("적당한 양의 냉각수를 양동이에 공급했습니다.\n");
 			bucket=1;
 			coolant=1;
@@ -117,6 +137,8 @@ int use(int n)
 	{
 		if(used[x][y]==0)
 		{
+			Uplog(time,2); 
+			
 			i=rand()%4+1;
 			keys++;
 			printf("마스터키를 1개 획득했습니다!\n");
@@ -158,6 +180,7 @@ int use(int n)
 	}
 	if(n==2)
 	{
+		Uplog(time,5); 
 		printf("공급 초기화 중...\n");
 		i=0;
 		j=0;
@@ -196,6 +219,7 @@ int use(int n)
 			}
 			else if(coolant==0)				
 			{
+				Uplog(time,3); 
 					printf("발전실에 냉각수가 공급되었습니다.\n");
 				coolant=1;
 			}
@@ -227,6 +251,8 @@ int use(int n)
 	}
 	if(n==6)
 	{
+		Uplog(time,4);
+		 
 		if(Control==0)
 		{
 			printf("연결로가 차단되었습니다.\n");
@@ -242,6 +268,7 @@ int use(int n)
 	{
 		if(used[y][x]==0)
 		{
+			Uplog(time,2); 
 			printf("정보가 담긴 수첩을 획득했습니다!\n");
 				printf("   수첩에 무언가 적혀 있습니다...\n");
 				information();
@@ -375,6 +402,10 @@ int main()
 			printf("\n");
 			i++;
 		}
+		printf("[최신 로그]");
+		LogM(1);
+		LogM(2);
+		LogM(3);
 		while(1)
 		{
 			chri=getch();
@@ -394,6 +425,8 @@ int main()
 				}
 				else
 				{
+					Uplog(time,1);
+					
 					y--;
 					break;
 				}
@@ -414,6 +447,8 @@ int main()
 				}
 				else
 				{
+					Uplog(time,1);
+					
 					x++;
 					break;
 				}
@@ -434,6 +469,8 @@ int main()
 				}
 				else
 				{
+					Uplog(time,1);
+					
 					x--;
 					break;
 				}
@@ -454,6 +491,8 @@ int main()
 				}
 				else
 				{
+					Uplog(time,1);
+					
 					y++;
 					break;
 				}
@@ -466,8 +505,9 @@ int main()
 		}
 		system("cls");
 		
-		
+		time++;
 		turn--;
+		
 		if(turn<=0)
 		{
 			if(coolant==0)
