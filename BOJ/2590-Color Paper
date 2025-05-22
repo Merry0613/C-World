@@ -1,0 +1,135 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<algorithm>
+
+int main()
+{
+	int one,two,thr,four,five,six;
+
+	scanf("%d",&one);
+	scanf("%d",&two);
+	scanf("%d",&thr);
+	scanf("%d",&four);
+	scanf("%d",&five);
+	scanf("%d",&six);
+	
+	int pan=six;
+	
+	six=0;
+	
+	while(1)
+	{
+		if(one==0 && two==0 && thr==0 && four==0 && five==0)
+		{
+			break;
+		}
+		while(five>0)
+		{
+			int can=36;
+			can-=25;
+			five--;
+			if(one<=can)
+			{
+				one=0;
+			}
+			else
+			{
+				one-=can;
+			}
+			pan++;
+		}
+		while(four>0)
+		{
+			int can=36;
+			can-=16;
+			four--;
+			if(two<=5)
+			{
+				can-=two*4;
+				two=0;
+			}
+			else
+			{
+				can-=20;
+				two-=5;
+			}
+			if(one<=can)
+			{
+				one=0;
+			}
+			else
+			{
+				one-=can;
+			}
+			pan++;
+		}
+		while(thr>0)
+		{
+			int can=36;
+			if(thr<=4)
+			{
+				can-=thr*9;
+				thr=0;
+			}
+			else
+			{
+				can-=36;
+				thr-=4;
+			}
+			
+			if(two>0 && can!=0)
+			{
+				if(can==27)
+				{
+					if(two<=5)
+					{
+						can-=two*4
+						two=0;
+					}
+					else
+					{
+						can=7
+						two-=5
+					}
+				}
+				if(can==18)
+				{
+					if(two<=3)
+					{
+						can-=two*4
+						two=0;
+					}
+					else
+					{
+						can=6
+						two-=3
+					}
+				}
+				if(can==9)
+				{
+					if(two<=1)
+					{
+						can-=two*4
+						two=0;
+					}
+					else
+					{
+						can=5
+						two-=1
+					}
+				}
+			}
+			
+			if(one<=can)
+			{
+				one=0;
+			}
+			else
+			{
+				one-=can;
+			}
+			
+			pan++;
+		}
+	}
+}
