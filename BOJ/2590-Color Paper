@@ -17,12 +17,8 @@ int main()
 	
 	six=0;
 	
-	while(1)
+	while(one!=0 || two!=0 || thr!=0 || four!=0 || five!=0)
 	{
-		if(one==0 && two==0 && thr==0 && four==0 && five==0)
-		{
-			break;
-		}
 		while(five>0)
 		{
 			int can=36;
@@ -83,39 +79,39 @@ int main()
 				{
 					if(two<=5)
 					{
-						can-=two*4
+						can-=two*4;
 						two=0;
 					}
 					else
 					{
-						can=7
-						two-=5
+						can=7;
+						two-=5;
 					}
 				}
 				if(can==18)
 				{
 					if(two<=3)
 					{
-						can-=two*4
+						can-=two*4;
 						two=0;
 					}
 					else
 					{
-						can=6
-						two-=3
+						can=6;
+						two-=3;
 					}
 				}
 				if(can==9)
 				{
 					if(two<=1)
 					{
-						can-=two*4
+						can-=two*4;
 						two=0;
 					}
 					else
 					{
-						can=5
-						two-=1
+						can=5;
+						two-=1;
 					}
 				}
 			}
@@ -131,5 +127,45 @@ int main()
 			
 			pan++;
 		}
+		while(two>0)
+		{
+			int can=36;
+			if(two<=9)
+			{
+				can-=4*two;
+				two=0;
+			}
+			else
+			{
+				two-=9;
+				can=0;
+			}
+			if(one<=can)
+			{
+				one=0;
+			}
+			else
+			{
+				one-=can;
+			}
+			pan++;
+		}
+		while(one>0)
+		{
+			int can=36;
+			if(one<=36)
+			{
+				can-=one;
+				one=0;
+			}
+			else
+			{
+				can=0;
+				one-=36;
+			}
+			pan++;
+		}
 	}
+	
+	printf("%d",pan);
 }
